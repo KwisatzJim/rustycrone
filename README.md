@@ -2,7 +2,7 @@
 
 A desktop GUI for managing user and root crontabs on macOS and Linux, built with Rust and Tauri 2.
 
-Download the macOS Apple silicon ZIP or Ubuntu 26.04 amd64 installer from [GitHub Releases](https://github.com/KwisatzJim/rustycrone/releases). The macOS build is ad-hoc signed and is not notarized.
+Download the Developer ID–signed and Apple-notarized macOS Apple silicon DMG/ZIP or Ubuntu 26.04 amd64 installer from [GitHub Releases](https://github.com/KwisatzJim/rustycrone/releases).
 
 ![RustyCrone icon](src-tauri/icons/128x128.png)
 
@@ -64,7 +64,7 @@ On macOS:
 npm run build:mac
 ```
 
-The app is created at `src-tauri/target/release/bundle/macos/RustyCrone.app`. This configuration uses ad-hoc signing for local testing. It is not Developer ID signed or notarized for distribution. The tested build is Apple silicon only.
+The app is created at `src-tauri/target/release/bundle/macos/RustyCrone.app`. This local build command uses ad-hoc signing for testing. The public macOS downloads are separately signed with Developer ID, notarized by Apple, and stapled for distribution; see [macOS signing](docs/macos-signing.md). The tested build is Apple silicon only.
 
 On Ubuntu:
 
