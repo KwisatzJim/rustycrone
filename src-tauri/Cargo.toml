@@ -3,6 +3,7 @@ name = "rustycrone"
 version = "0.1.0"
 description = "A friendly cron manager for macOS and Linux"
 edition = "2021"
+license = "MIT"
 
 [build-dependencies]
 tauri-build = { version = "2", features = [] }

@@ -1,6 +1,6 @@
 # RustyCrone 0.1.0 local validation
 
-Recorded 2026-10-25. Packaged artifacts are local test builds; no binary release has been published.
+Recorded 2026-10-25. The v0.1.0 preview release packages the tested executables with the MIT license notice. The license packaging does not change application executable bytes.
 
 ## Automated checks
 
@@ -28,4 +28,4 @@ The user confirmed removal of the test root jobs from the standalone macOS app a
 - Complex cron expressions are preserved and displayed but cannot yet be edited in the form. There is no backup-restore interface yet.
 - Crontab has no atomic conditional-write operation. The app rechecks before saving, but simultaneous edits from another tool should be avoided.
 
-The local `dist/` folder contains the preserved tested binaries, a source archive, and SHA-256 checksums. Build commands are documented in the README.
+The local `dist/` folder preserves the original tested artifacts. `dist/release-v0.1.0/` contains the GitHub preview-release downloads and checksums. The macOS ZIP includes LICENSE alongside the unchanged signed app; the Ubuntu package adds `/usr/share/doc/rusty-crone/copyright`, with every original installed payload verified byte-for-byte unchanged. Source archives for the MIT-licensed tag are provided by GitHub. Build commands are documented in the README.

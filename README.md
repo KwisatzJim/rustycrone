@@ -2,6 +2,8 @@
 
 A desktop GUI for managing user and root crontabs on macOS and Linux, built with Rust and Tauri 2.
 
+Download the macOS Apple silicon ZIP or Ubuntu 26.04 amd64 installer from [GitHub Releases](https://github.com/KwisatzJim/rustycrone/releases). The macOS build is ad-hoc signed and is not notarized.
+
 ![RustyCrone icon](src-tauri/icons/128x128.png)
 
 ## Features
@@ -72,7 +74,7 @@ npm run build:deb
 
 The installer is created under `src-tauri/target/release/bundle/deb/`. Install the generated file using `sudo apt install ./RustyCrone_0.1.0_amd64.deb`. It includes the application-menu entry and icons and declares cron, pkexec, and desktop-library dependencies. Building does not install anything or change schedules. The tested package was built on Ubuntu 26.04.1 LTS; older distributions are not validated.
 
-Node and npm are not required to run either packaged app. Local test installers are kept in the ignored `dist/` folder and are not uploaded with the source.
+Node and npm are not required to run either packaged app. Installers and SHA-256 checksums are distributed through GitHub Releases; generated files remain outside the source history.
 
 ## Checks and validation
 
@@ -90,4 +92,4 @@ User and root workflows were verified in real windows on macOS and Ubuntu 26.04.
 
 ## License
 
-No software license has been selected yet.
+MIT. See [LICENSE](LICENSE).
