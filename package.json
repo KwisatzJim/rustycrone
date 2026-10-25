@@ -1,0 +1,15 @@
+{
+  "name": "rustycrone",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "tauri": "tauri",
+    "check": "node --check src/app.js && cargo fmt --manifest-path src-tauri/Cargo.toml -- --check && cargo clippy --locked --manifest-path src-tauri/Cargo.toml --all-targets -- -D warnings",
+    "test": "node --test tests/frontend.test.mjs && cargo test --locked --manifest-path src-tauri/Cargo.toml",
+    "build:check": "tauri build --debug --no-bundle --ci",
+    "build:mac": "tauri build --bundles app --config src-tauri/tauri.local-macos.conf.json -- --locked",
+    "build:deb": "tauri build --bundles deb --config src-tauri/tauri.local-linux.conf.json -- --locked"
+  },
+  "devDependencies": { "@tauri-apps/cli": "^2.0.0" }
+}

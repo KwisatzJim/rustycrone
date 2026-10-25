@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RustyCrone</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <main>
+    <header><span class="badge">RC</span><div><h1>RustyCrone</h1><p>Your schedules, clearly arranged.</p></div></header>
+    <section class="toolbar" aria-label="Crontab selection">
+      <label for="target">Crontab</label>
+      <select id="target"><option value="user">Current user</option><option value="root">Root (administrator)</option></select>
+      <button id="load">Load crontab</button>
+    </section>
+    <p id="root-help" class="help" hidden>Loading or changing root jobs may open a system administrator prompt. Enter your password only in that system dialog. Root jobs run with full system access.</p>
+    <section class="panel">
+      <div class="panel-heading"><h2 id="heading">Current user’s crontab</h2><span class="pill">Current contents</span></div>
+      <p id="status" role="status" aria-live="polite">Choose a crontab and click Load crontab.</p>
+      <div id="job-list" aria-label="Scheduled jobs"></div>
+      <section id="delete-confirmation" hidden aria-labelledby="delete-heading">
+        <h3 id="delete-heading">Delete this user job?</h3>
+        <pre id="delete-entry"></pre>
+        <p class="help">This removes the selected schedule. A backup is created first. It does not stop a command that is already running.</p>
+        <p id="delete-root-help" class="help" hidden>Deleting a root job requests administrator approval and creates a root-only backup.</p>
+        <button id="confirm-delete" type="button" class="danger">Delete job</button>
+        <button id="cancel-delete" type="button">Cancel</button>
+      </section>
+      <details><summary>Full crontab text</summary>
+      <pre id="contents" tabindex="0" aria-label="Crontab contents">No crontab loaded.</pre>
+      </details>
+    </section>
+    <section class="panel job-panel" aria-labelledby="add-heading">
+      <div class="panel-heading"><h2 id="add-heading">Add job</h2><span class="pill">Preview, then save</span></div>
+      <p>Build a schedule and review it before saving to the selected crontab.</p>
+      <div id="edit-original" hidden><h3>Original job</h3><pre id="original-entry"></pre><p class="help">Saving changes replaces this entry in its current position. Other jobs and settings are preserved.</p></div>
+      <button id="cancel-edit" type="button" hidden>Cancel editing</button>
+      <form id="job-form">
+        <label for="command">Command</label>
+        <input id="command" type="text" required placeholder="/absolute/path/to/your-script.sh" autocomplete="off" spellcheck="false" aria-describedby="command-help">
+        <p id="command-help" class="help">Use full paths. Cron runs commands through a shell with a limited environment. Percent signs (%) have special meaning in cron.</p>
+        <div class="schedule-fields">
+          <div><label for="schedule">Schedule</label><select id="schedule"><option value="hourly">Every hour</option><option value="interval">Every N minutes</option><option value="daily">Daily</option><option value="weekly">Weekly</option><option value="monthly">Monthly</option><option value="startup">At startup (cron)</option></select></div>
+          <div id="interval-field" hidden><label for="interval">Run every</label><select id="interval" disabled><option value="1">1 minute</option><option value="5">5 minutes</option><option value="10">10 minutes</option><option value="15" selected>15 minutes</option><option value="20">20 minutes</option><option value="30">30 minutes</option></select></div>
+          <div id="minute-field"><label for="minute">Minute past the hour</label><input id="minute" type="number" min="0" max="59" step="1" value="0" required></div>
+          <div id="time-field" hidden><label for="time">Time</label><input id="time" type="time" value="09:00" required disabled></div>
+          <div id="day-field" hidden><label for="day">Day</label><select id="day" disabled><option value="1">Monday</option><option value="2">Tuesday</option><option value="3">Wednesday</option><option value="4">Thursday</option><option value="5">Friday</option><option value="6">Saturday</option><option value="0">Sunday</option></select></div>
+          <div id="month-day-field" hidden><label for="month-day">Day of month</label><input id="month-day" type="number" min="1" max="31" step="1" value="1" required disabled aria-describedby="month-day-help"><p id="month-day-help" class="help">Days 29–31 skip months that do not contain that date.</p></div>
+        </div>
+        <p id="startup-help" class="help" hidden>Runs when the cron service starts, usually during boot, rather than when you log in. Network connections and other services may not be ready yet.</p>
+        <p class="help">Times use the computer’s local time zone. Cron normally requires the computer to be awake.</p>
+        <button type="submit">Preview job</button>
+      </form>
+      <div id="job-preview" hidden aria-live="polite"><h3 id="preview-heading">Job preview</h3><p id="preview-description"></p><pre id="preview-entry"></pre><p id="save-help" class="help">Load your user crontab before saving.</p><button id="save-job" type="button" disabled>Save job to user crontab</button></div>
+    </section>
+    <footer>Schedules run through your system’s cron service. Each change creates a backup first. Changing root jobs requires administrator authorization.</footer>
+  </main>
+</body>
+</html>
